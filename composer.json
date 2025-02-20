@@ -1,0 +1,19 @@
+{
+    "name": "flow/harbor",
+    "type": "library",
+    "description": "A DI container that is also event listener",
+    "license": "mit",
+    "autoload": {
+        "psr-4": {
+            "Flow\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Effendi Saputra"
+        }
+    ],
+    "require": {
+        "php": ">7.4"
+    }
+}
