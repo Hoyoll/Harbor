@@ -1,11 +1,11 @@
 {
-    "name": "flow/harbor",
+    "name": "swim/harbor",
     "type": "library",
     "description": "A DI container that is also event listener",
     "license": "mit",
     "autoload": {
         "psr-4": {
-            "Flow\\": "src/"
+            "Swim\\": "src/"
         }
     },
     "authors": [
