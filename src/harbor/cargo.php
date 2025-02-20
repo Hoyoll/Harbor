@@ -1,5 +1,5 @@
 <?php
-namespace Flow\Harbor;
+namespace Swim\Harbor;
 
 /**
  * This is a way to make Crate globally accesible
