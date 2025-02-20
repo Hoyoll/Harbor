@@ -1,5 +1,5 @@
 <?php
-namespace Flow\Harbor;
+namespace Swim\Harbor;
 
 use Exception;
 
