@@ -24,7 +24,7 @@ final class Crate
     public function store( string $name, mixed $process ) : self 
     {
         if ($this->worker[$name] ?? null) {
-            throw new Exception("Worker named $name already exist!");
+            return new Exception("Worker named $name already exist!");
         }
         $this->worker[$name] = $process;
         return $this;
@@ -38,7 +38,7 @@ final class Crate
     {
         $worker = $this->worker[$name] ?? null;
         if ($worker === null) {
-            throw new Exception("Worker named $name does not exist!");
+            return new Exception("Worker named $name does not exist!");
         }
         return $this->worker[$name];
     }
@@ -52,7 +52,7 @@ final class Crate
     {
         $worker = $this->worker[$name] ?? null;
         if ($worker === null) {
-            throw new Exception("Worker named $name does not exist!");
+            return new Exception("Worker named $name does not exist!");
         }
         return new $this->worker[$name](...$dependency);
     }
@@ -67,7 +67,7 @@ final class Crate
 
         $worker = $this->worker[$name] ?? null;
         if ($worker === null) {
-            throw new Exception("Worker named $name does not exist!");
+            return new Exception("Worker named $name does not exist!");
         } 
         if (is_string($worker)) {
             return (new $worker(...$dependency))();
