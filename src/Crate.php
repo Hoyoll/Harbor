@@ -7,6 +7,7 @@ final class Crate
 {
     private array $worker;
     private $error;
+    
     /**
      * An ergonomic way to create new Crate!
      */
