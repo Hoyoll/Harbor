@@ -6,14 +6,14 @@ use Exception;
 final class Crate 
 {
     private array $worker;
-
+    private $error;
     /**
      * An ergonomic way to create new Crate!
      */
 
     public static function new() : self 
     {
-        return new Crate();
+        return new self();
     }
 
     /**
@@ -24,7 +24,7 @@ final class Crate
     public function store( string $name, mixed $process ) : self 
     {
         if ($this->worker[$name] ?? null) {
-            return new Exception("Worker named $name already exist!");
+            return ($this->error)(...$dependency);
         }
         $this->worker[$name] = $process;
         return $this;
@@ -38,7 +38,7 @@ final class Crate
     {
         $worker = $this->worker[$name] ?? null;
         if ($worker === null) {
-            return new Exception("Worker named $name does not exist!");
+            return ($this->error)(...$dependency);
         }
         return $this->worker[$name];
     }
@@ -52,7 +52,7 @@ final class Crate
     {
         $worker = $this->worker[$name] ?? null;
         if ($worker === null) {
-            return new Exception("Worker named $name does not exist!");
+            return ($this->error)(...$dependency);
         }
         return new $this->worker[$name](...$dependency);
     }
@@ -67,11 +67,28 @@ final class Crate
 
         $worker = $this->worker[$name] ?? null;
         if ($worker === null) {
-            return new Exception("Worker named $name does not exist!");
+            return ($this->error)(...$dependency);
         } 
         if (is_string($worker)) {
             return (new $worker(...$dependency))();
         }
         return $worker(...$dependency);
+    }
+
+    /**
+     * You can override the default error handler here
+     */
+
+    public function catch(callable $handler): self 
+    {
+        $this->error = $handler;
+        return $this;
+    }
+
+    private function __construct() 
+    {
+        $this->error = function () {
+            throw new Exception("Error! Faulty request!");
+        };
     }
 }
