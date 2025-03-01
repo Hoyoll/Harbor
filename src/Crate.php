@@ -58,7 +58,7 @@ final class Crate
     }
 
     /**
-     * If you store a callable call it using this method,
+     * If you store a callable, call it using this method,
      * or if it is a class instance or classname that have __invoke method
      */
 
