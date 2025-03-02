@@ -25,7 +25,7 @@ final class Crate
     public function store( mixed $name, mixed $process ) : self 
     {
         if ($this->worker[$name] ?? null) {
-            return new Exception("Worker named $name already exist!");
+            throw new Exception("Worker named $name already exist!");
         }
         $this->worker[$name] = $process;
         return $this;
