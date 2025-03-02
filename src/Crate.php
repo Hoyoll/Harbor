@@ -22,10 +22,10 @@ final class Crate
      * just make sure you're calling it with the right method!
      */
 
-    public function store( string $name, mixed $process ) : self 
+    public function store( mixed $name, mixed $process ) : self 
     {
         if ($this->worker[$name] ?? null) {
-            return ($this->error)(...$dependency);
+            return new Exception("Worker named $name already exist!");
         }
         $this->worker[$name] = $process;
         return $this;
@@ -35,11 +35,11 @@ final class Crate
      * Retrieve the worker value directly
      */
 
-    public function get(string $name) : mixed
+    public function get(mixed $name) : mixed
     {
         $worker = $this->worker[$name] ?? null;
         if ($worker === null) {
-            return ($this->error)(...$dependency);
+            return new Exception("No worker named $name");
         }
         return $this->worker[$name];
     }
@@ -49,7 +49,7 @@ final class Crate
      * don't forget to use fully qualified name like Namespace/classname::class!
      */
 
-    public function charge( string $name, array $dependency = [] ) : object 
+    public function charge( mixed $name, array $dependency = [] ) : object 
     {
         $worker = $this->worker[$name] ?? null;
         if ($worker === null) {
@@ -63,7 +63,7 @@ final class Crate
      * or if it is a class instance or classname that have __invoke method
      */
 
-    public function emit( string $name, array $dependency = [] ) : mixed 
+    public function emit( mixed $name, array $dependency = [] ) : mixed 
     {
 
         $worker = $this->worker[$name] ?? null;
