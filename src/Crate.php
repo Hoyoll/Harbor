@@ -86,6 +86,13 @@ final class Crate
         return $this;
     }
 
+    public function remove(mixed $key): void 
+    {
+        if ($this->worker[$key]) {
+            unset($this->worker[$key]);
+        }
+    }
+
     private function __construct() 
     {
         $this->error = function () {
