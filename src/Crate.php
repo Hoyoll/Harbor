@@ -39,7 +39,7 @@ final class Crate
     {
         $worker = $this->worker[$name] ?? null;
         if ($worker === null) {
-            return new Exception("No worker named $name");
+            return $this->error;
         }
         return $this->worker[$name];
     }
