@@ -80,7 +80,7 @@ final class Crate
      * You can override the default error handler here
      */
 
-    public function catch(callable $handler): self 
+    public function catch(callable | object $handler): self 
     {
         $this->error = $handler;
         return $this;
